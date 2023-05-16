@@ -18,6 +18,9 @@ import Loader from '@/components/Loader';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { MdDeleteForever } from 'react-icons/md';
 import { GoSignOut } from 'react-icons/go';
+import { useState } from 'react';
+
+const arr = [1, 2, 3];
 
 export default function Home() {
   const { authUser, isLoading, signOut } = useAuth();
