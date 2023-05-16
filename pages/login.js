@@ -40,7 +40,7 @@ const LoginForm = () => {
         </div>
       </div>
       <div
-        className='w-[40%] bg-slate-400 bg-cover bg-right-top hidden lg:block'
+        className='w-[60%] bg-center hidden lg:block bg-no-repeat'
         style={{
           backgroundImage: "url('/auth-banner.png')",
         }}
