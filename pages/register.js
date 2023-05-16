@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { auth } from '../firebase/firebase';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from 'firebase/auth';
+
+const provider = new GoogleAuthProvider();
 
 const RegisterForm = () => {
   const [username, setUsername] = useState(null);
@@ -16,12 +23,18 @@ const RegisterForm = () => {
       await updateProfile(auth.currentUser, {
         displayName: username,
       });
-      console.log(user);
     } catch (error) {
-      console.log('Error', error);
+      console.error('Error', error);
     }
   };
-
+  // google auth
+  const signInGoogle = async () => {
+    try {
+      const user = await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.error('Error', error);
+    }
+  };
   return (
     <main className='flex lg:h-[100vh]'>
       <div className='w-full lg:w-[60%] p-8 md:p-14 flex items-center justify-center lg:justify-start'>
@@ -36,7 +49,10 @@ const RegisterForm = () => {
 
           <div className='bg-black/[0.05] text-white w-full py-4 mt-10 rounded-full transition-transform hover:bg-black/[0.8] active:scale-90 flex justify-center items-center gap-4 cursor-pointer group'>
             <FcGoogle size={22} />
-            <span className='font-medium text-black group-hover:text-white'>
+            <span
+              className='font-medium text-black group-hover:text-white'
+              onClick={signInGoogle}
+            >
               Login with Google
             </span>
           </div>
