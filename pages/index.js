@@ -82,7 +82,7 @@ export default function Home() {
         <div className='bg-white -m-6 p-3 sticky top-0'>
           <div className='flex justify-center flex-col items-center'>
             <span className='text-7xl mb-10'>📝</span>
-            <h1 className='text-5xl md:text-7xl font-bold'>Todo Nextjs</h1>
+            <h1 className='text-5xl md:text-7xl font-bold'>Easy Todos</h1>
           </div>
           <div className='flex items-center gap-2 mt-10'>
             <input
