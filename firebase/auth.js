@@ -29,7 +29,7 @@ export default function useFirebaseAuth() {
     setIsLoading(false);
   };
 
-  //signout
+  //signOut
   const signOut = () => {
     authSignOut(auth).then(() => cleanupAuthUser());
   };
@@ -54,4 +54,4 @@ export const AuthUserProvider = ({ children }) => {
   );
 };
 
-export const userAuth = () => useContext(AuthUserContext);
+export const useAuth = () => useContext(AuthUserContext);
