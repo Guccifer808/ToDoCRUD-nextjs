@@ -58,7 +58,7 @@ export default function Home() {
       let data = [];
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, ' => ', doc.data());
+        // console.log(doc.id, ' => ', doc.data());
         data.push({ ...doc.data(), id: doc.id });
       });
       setTodos(data);
@@ -68,13 +68,30 @@ export default function Home() {
   };
 
   //delete todos
-
   const deleteTodo = async (docId) => {
     try {
       await deleteDoc(doc(db, 'todos', docId));
       fetchTodos(authUser.uid);
     } catch (error) {
       console.error(error);
+    }
+  };
+  // mark as checked
+  const checkTodo = async (event, docId) => {
+    try {
+      const docRef = doc(db, 'todos', docId);
+      await updateDoc(docRef, {
+        done: event.target.checked,
+      });
+      fetchTodos(authUser.uid);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  // on Enter add todo
+  const onKeyUpHandler = () => {
+    if (event.key === 'Enter' && todoInput.length > 0) {
+      addTodo();
     }
   };
   return !authUser ? (
@@ -102,6 +119,7 @@ export default function Home() {
               autoFocus
               onChange={(e) => setTodoInput(e.target.value)}
               value={todoInput}
+              onKeyUp={onKeyUpHandler}
             />
             <button
               className='w-[60px] h-[60px] rounded-md bg-main flex justify-center items-center cursor-pointer transition-all duration-300 hover:bg-black/[0.8]'
@@ -124,8 +142,12 @@ export default function Home() {
                     type='checkbox'
                     className='w-4 h-4 accent-main rounded-lg'
                     checked={todo.done}
+                    onChange={(e) => checkTodo(e, todo.id)}
                   />
-                  <label htmlFor={`todo-${todo.id}`} className='font-medium'>
+                  <label
+                    htmlFor={`todo-${todo.id}`}
+                    className={`font-medium ${todo.done ? 'line-through' : ''}`}
+                  >
                     {todo.content}
                   </label>
                 </div>
