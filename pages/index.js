@@ -67,6 +67,16 @@ export default function Home() {
     }
   };
 
+  //delete todos
+
+  const deleteTodo = async (docId) => {
+    try {
+      await deleteDoc(doc(db, 'todos', docId));
+      fetchTodos(authUser.uid);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return !authUser ? (
     <Loader />
   ) : (
@@ -124,6 +134,7 @@ export default function Home() {
                   <MdDeleteForever
                     size={24}
                     className='text-red-400 hover:text-red-600 cursor-pointer'
+                    onClick={() => deleteTodo(todo.id)}
                   />
                 </div>
               </div>
