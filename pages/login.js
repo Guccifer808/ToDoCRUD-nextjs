@@ -38,7 +38,6 @@ const LoginForm = () => {
   const loginWithGoogle = async () => {
     try {
       const user = await signInWithPopup(auth, provider);
-      console.log(user);
     } catch (error) {
       console.error('Error', error);
     }

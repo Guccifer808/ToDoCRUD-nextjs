@@ -113,7 +113,7 @@ export default function Home() {
           </div>
           <div className='flex items-center gap-2 mt-10'>
             <input
-              placeholder={`👋 Hello {name}`}
+              placeholder={`👋 ${authUser.username}! Add your new task here`}
               type='text'
               className='font-semibold placeholder:text-gray-500 border-[2px] border-black h-[60px] grow shadow-sm rounded-md px-4 focus-visible:outline-main text-lg transition-all duration-300 text-center md:text-left'
               autoFocus

@@ -34,7 +34,11 @@ const RegisterForm = () => {
     if (!email || !username || !password) return;
     // creating new user w email, updating displayName
     try {
-      const user = await createUserWithEmailAndPassword(auth, email, password);
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       await updateProfile(auth.currentUser, {
         displayName: username,
       });
